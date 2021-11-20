@@ -3,15 +3,8 @@
 #include <sys/mman.h>
 #include <unistd.h>
 
-int main(int argc, char *argv[]){
-    if (argc == 2){
-        int pin = (int)argv[0]-48;
-        if (gpio_lev & (1<<pin)){
-            gpio_clr |= (1<<pin);
-        }else{
-            gpio_set |= (1<<pin);
-        }
-    }
+int main(void){
+    
 }
 
 unsigned int *gpio;
