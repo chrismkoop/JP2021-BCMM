@@ -3,11 +3,24 @@
 #include <sys/mman.h>
 #include <unistd.h>
 
-int main(void){
+unsigned int *gpio;
 
+int main(void){
+    openpins();
+    setmode(24, 0x0);
+    setmode(4, 0x1);
+    long p24 = readpin(24);
+    printf("Pin24: %l", p24);
+    while(true){
+        p24 = readpin(24);
+        if (p24){
+            setpin(4);
+        }else{
+            clrpin(4);
+        }
+    }
 }
 
-unsigned int *gpio;
 int openpins(void){
         int fdgpio = open("/dev/gpiomem", O_RDWR);
     if (fdgpio<0){
@@ -29,11 +42,11 @@ long readpin(int pin){
     return (gpio[13] & (1 << pin));
 }
 
-long setpins(int pin){
+long setpin(int pin){
     gpio[7] = 1 << pin;
 }
 
-long clrpins(int pin){
+long clrpin(int pin){
     gpio[10] = 1 << pin;
 }
 
