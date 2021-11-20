@@ -32,20 +32,19 @@ int openpins(void){
                             );
 }
 
-long readpins(void){
-    return gpio[13];
+long readpin(int pin){
+    return (gpio[13] & (1 << pin));
 }
 
-long setpins(int pins){
-    
+long setpins(int pin){
+    gpio[7] = 1 << pin;
 }
 
-long clrpins(int pins);
+long clrpins(int pin){
+    gpio[10] = 1 << pin;
+}
 
-int setmode(int pin, bool mode){
-    if (pin<9){
-        gpio[0] = 
-    }else{
-
-    }
+int setmode(int pin, int mode){
+    int pinbank = (int) pin / 10;
+    gpio[pinbank] = mode << (pin * 3);
 }
