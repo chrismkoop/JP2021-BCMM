@@ -4,7 +4,7 @@
 #include <unistd.h>
 
 int main(void){
-    
+
 }
 
 unsigned int *gpio;
@@ -16,13 +16,13 @@ int openpins(void){
     }
     gpio = 
         (unsigned int *)mmap(
-                                0, 
-                                4096,
-                                PROT_READ+PROT_WRITE,
-                                MAP_SHARED,
-                                fdgpio,
-                                0
-                            );
+            0, 
+            4096,
+            PROT_READ+PROT_WRITE,
+            MAP_SHARED,
+            fdgpio,
+            0
+        );
 }
 
 long readpin(int pin){
